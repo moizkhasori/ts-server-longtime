@@ -1,8 +1,12 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import errorHandler from "./Middlewares/errorHandler.js";
+import errorHandler from "./middlewares/errorHandler.js";
 import { connectToMongoDB } from "./config/connectMongoDB.js";
+import { TryCatch } from "./utils/trycatch.js";
+import { userRouter } from "./routes/userRoutes.js";
+
+
 dotenv.config({
     path: "./.env"
 });
@@ -16,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // routes
-
+app.use("/api/v1/user", userRouter)
 
 // errorMiddleware
 app.use(errorHandler)
